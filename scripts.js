@@ -34,7 +34,7 @@ function hover_grid_element (cellItem,typeSelector)
 let typeSelector = 1; // type of pen: 0:eraser 1:black 2:red
 
 const gridContainer = document.getElementById('container-grid');
-const numberOfItems = 15;
+let numberOfItems = 18;
 var rootCSS = document.querySelector(':root');
 
 rootCSS.style.setProperty("--nr-columns-rows", numberOfItems);
@@ -48,9 +48,8 @@ for (let i = 1; i <= numberOfItems; i++)
 {
     for (let i = 1; i <= numberOfItems; i++) 
     {
-        const gridItem = document.createElement('div');
+        gridItem = document.createElement('div');
         gridItem.classList.add('grid-item');
-        gridItem.textContent = i;
         gridContainer.appendChild(gridItem);
     }
 }
@@ -58,7 +57,7 @@ for (let i = 1; i <= numberOfItems; i++)
 
 
 // cell grid items
-const cellGridItems = document.querySelectorAll('.grid-item');
+let cellGridItems = document.querySelectorAll('.grid-item');
 
 
 //eraser button
@@ -96,7 +95,72 @@ clearButton.addEventListener('click', function(e) {
 
 });
 
+//select size button
+const selectSizeButton = document.querySelector('.select-size');
+selectSizeButton.addEventListener('click', function(e) {
 
+    var inputValue = window.prompt('Please enter an integer:');
+    if (inputValue !== null && !isNaN(inputValue) && inputValue.trim() !== '') 
+    {
+        var parsedInput = parseInt(inputValue, 10);
+        console.log('Input value:', parsedInput);
+
+        //delete the original grid
+        var elementsToRemove = document.getElementsByClassName('grid-item');
+        while (elementsToRemove.length > 0) {
+          elementsToRemove[0].parentNode.removeChild(elementsToRemove[0]);
+        }
+
+
+        numberOfItems = parsedInput;
+
+
+        rootCSS.style.setProperty("--nr-columns-rows", numberOfItems);
+        rootCSS.style.setProperty("--cell-column-width", (600/numberOfItems).toString() + "px");
+
+        //create the grid
+
+        for (let i = 1; i <= numberOfItems; i++) 
+        {
+            for (let i = 1; i <= numberOfItems; i++) 
+            {
+                gridItem = document.createElement('div');
+                gridItem.classList.add('grid-item');
+                gridContainer.appendChild(gridItem);
+            }   
+        }
+
+        cellGridItems = document.querySelectorAll('.grid-item');
+        getCellItems();
+
+
+      // Do something with the parsedInput value
+    }
+
+});
+
+
+
+
+
+function getCellItems()
+{
+    cellGridItems.forEach( (cellItem) => {
+ 
+        cellItem.addEventListener('mouseover', function(e)  {
+            var hoveredElement = e.target;
+            console.log('Hovered element:', hoveredElement);
+            hover_grid_element (hoveredElement,typeSelector);     //cellItem.classList.add('on-hover');
+        });
+    
+    });
+}
+
+
+getCellItems();
+
+
+/*
 
 
 cellGridItems.forEach( (cellItem) => {
@@ -109,3 +173,4 @@ cellGridItems.forEach( (cellItem) => {
 
 });
 
+*/

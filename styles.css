@@ -36,3 +36,38 @@
 .on-hover-rainbow {
     background-color: var(--cell-rainbow-color);
 }
+
+.header {
+    display: flex;
+    flex-direction: column;
+    height: 300px;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(34, 34, 138);
+    color: rgb(218, 207, 207);
+}
+
+button {
+    background-color: #04AA6D;
+    border: none;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+  }
+
+.selector-options {
+    display:flex;
+    flex-direction: column;
+
+  }
+
+  .main-content {
+    height: 900px;
+    width: 1100px;
+    gap: 75px;
+}
+  
